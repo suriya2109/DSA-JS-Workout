@@ -43,7 +43,6 @@ class IntArray {
     constructor(capacity = IntArray.DEFAULT_CAP) {
         if (capacity < 0) throw new Error("Illegal Capacity: " + capacity);
         this.arr = new Array(capacity);
-        console.log(this.arr);
         this.len = 0;
         this.capacity = capacity;
     }
@@ -111,9 +110,9 @@ class IntArray {
         let left = 0,
             right = this.len - 1;
         while (left < right) {
-            let tmp = this.arr[left];
-            this.arr[left] = this.arr[right];
-            this.arr[right] = tmp;
+            let tmp = this.arr[left]; // save left element
+            this.arr[left] = this.arr[right]; // copy right element into left
+            this.arr[right] = tmp; // put saved left element into right
             left++;
             right--;
         }
@@ -123,7 +122,7 @@ class IntArray {
         let low = 0,
             high = this.len - 1;
         while (low <= high) {
-            let mid = Math.floor((low + high) / 2);
+            // let mid = Math.floor((low + high) / 2); I Linked very much
             if (this.arr[mid] === key) return mid;
             else if (this.arr[mid] < key) low = mid + 1;
             else high = mid - 1;
